@@ -1,4 +1,4 @@
-Hello. 
+# Welcome
 For this notebook, my objective is to apply the knowledge I acquired in building convolutional neural networks. 
 I chose the EuroSAT dataset from Kaggle (https://www.kaggle.com/datasets/ryanholbrook/eurosat). 
 
@@ -12,7 +12,7 @@ The notebook is divided into the following sections:
 4. Optimising data access 
 5. Augmenting the data 
 6. Building, training and testing the CNN model
-7. What  <span style = "color: red;">SURPRISED ME!! </span> 🤯🤯🤯🤯🤯 😮😮😮😮😮😮😮
+7. What  <span style = "color: red;">**SURPRISED ME!!** </span> 🤯🤯🤯🤯🤯 😮😮😮😮😮😮😮
 
 ![picture](https://media.makeameme.org/created/surprises-surprises-everywhere.jpg)
 
