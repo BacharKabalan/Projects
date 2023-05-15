@@ -17,3 +17,4 @@ The notebook is divided into the following sections:
 ![picture](https://media.makeameme.org/created/surprises-surprises-everywhere.jpg)
 
 Please click here to view the notebook for this project: [Identifying land use with CNNs](https://github.com/BacharKabalan/Applying/blob/main/DeepLearning/EuroSat%20Images%20(Kaggle)/Sattelite_images.ipynb)
+'''diff -text in red '''
