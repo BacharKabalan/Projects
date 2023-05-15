@@ -12,7 +12,7 @@ The notebook is divided into the following sections:
 4. Optimising data access 
 5. Augmenting the data 
 6. Building, training and testing the CNN model
-7. What  <font color = #f03c15>**SURPRISED ME!!** </font> 🤯🤯🤯🤯🤯 😮😮😮😮😮😮😮
+7. What  <span style = "color:red;">**SURPRISED ME!!** </span> 🤯🤯🤯🤯🤯 😮😮😮😮😮😮😮
 
 ![picture](https://media.makeameme.org/created/surprises-surprises-everywhere.jpg)
 
