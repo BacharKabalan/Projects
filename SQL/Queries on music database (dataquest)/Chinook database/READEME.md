@@ -22,3 +22,5 @@ The notebook is outlined as follows:
     3.3 Analyzing the results
     
     3.4 Summarizing the findings and recommendations
+
+Please click on the following link to access the notebook: https://github.com/BacharKabalan/Applying/blob/main/SQL/Queries%20on%20music%20database%20(dataquest)/Chinook%20database/SQL.ipynb
