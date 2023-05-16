@@ -1,3 +1,4 @@
+# INTRO
 The objective of this notebook is to sharpen my SQL skills as part of my Data Engineering toolbox. 
 The project goal is to conduct queries on the Chinook data base to answer business questions. The chinook database contains data of customer purchases of music albums and tracks. 
 
