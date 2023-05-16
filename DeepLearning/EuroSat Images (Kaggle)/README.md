@@ -11,7 +11,7 @@ The notebook is divided into the following sections:
 3. Building the input pipeline (including preprocessing)
 4. Optimising data access 
 5. Augmenting the data 
-6. Building, +training and testing the CNN model
+6. Building, + training and testing the CNN model
 7. What  <font color = "red">**SURPRISED ME!!** </font> 🤯🤯🤯🤯🤯 😮😮😮😮😮😮😮
 
 ![picture](https://media.makeameme.org/created/surprises-surprises-everywhere.jpg)
