@@ -1,0 +1,5 @@
+prefect
+beautifulsoup4
+httpx
+jupyter
+psycopg2-binary
