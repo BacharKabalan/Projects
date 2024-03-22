@@ -37,8 +37,7 @@ def filter_daily_questions(question_tags, age_tags):
             question_id = question.find('a', href=re.compile(r'item\?id=\d+'))
             print(question_id['href'])
             comments = scrape_question_comments(question_id['href'])
-            comments = json.dumps(comments)#serializing the list of strings into json so i can save it as TEXT in the sql table
-            pg_con = 'postgres://postgres:1234@localhost:5432/hcker_nws'
+            pg_con = 'postgres://postgres:mysecretpassword@localhost:5434/postgres'
             create_table(pg_con)
             insert_question(pg_con, question, age, comments)
 
@@ -101,8 +100,12 @@ def insert_question(conn_params, question, age, comments):
                 insert_query = """
                 INSERT INTO questions (question, age, comments) VALUES (%s, %s, %s)
                 """
-                ##### Convert the list of dictionaries to a JSON string before inserting #####
-                cur.execute(insert_query, (question, age, comments))
+                ##### Extract text content from BeautifulSoup Tag objects #####
+                question_text = question.get_text(separator=' ', strip=True)
+                age_text = age.get_text(separator=' ', strip=True)
+                # Combine comments into a single string
+                comments_text = ' '.join(comments)
+                cur.execute(insert_query, (question_text, age_text, comments_text))
                 conn.commit()
     except Exception as e:
         print(f"Error inserting question: {e}")
