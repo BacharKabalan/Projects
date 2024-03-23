@@ -1,0 +1,38 @@
+# Welcome to your prefect.yaml file! You can use this file for storing and managing
+# configuration for deploying your flows. We recommend committing this file to source
+# control along with your flow code.
+
+# Generic metadata about this project
+name: hacker_news
+prefect-version: 2.16.3
+
+# build section allows you to manage and build docker images
+build: null
+
+# push section allows you to manage if and how this project is uploaded to remote locations
+push: null
+
+# pull section allows you to provide instructions for cloning this project in remote locations
+pull:
+- prefect.deployments.steps.set_working_directory:
+    directory: /mnt/c/Users/basha/Desktop/Github/Projects/MLOPs/hacker_news
+
+# the deployments section allows you to provide configuration for deploying flows
+deployments:
+- name: hckr_nws
+  version: null
+  tags: []
+  description: "This is the main flow that will parse the main page and then initiate\
+    \ \nthe subflows and tasks to fetch the questions, their age, the comments and\
+    \ save \neverything in a postgresql database"
+  entrypoint: hckr_nws_flow.py:fetch_all_questions
+  parameters: {}
+  work_pool:
+    name: hckr_nws_wrkr
+    work_queue_name: null
+    job_variables: {}
+  schedules:
+  - interval: 30.0
+    anchor_date: '2024-03-23T08:55:46.248695+00:00'
+    timezone: UTC
+    active: true
