@@ -7,10 +7,10 @@ name: hacker_news
 prefect-version: 2.16.3
 
 # build section allows you to manage and build docker images
-build: null
+build:
 
 # push section allows you to manage if and how this project is uploaded to remote locations
-push: null
+push:
 
 # pull section allows you to provide instructions for cloning this project in remote locations
 pull:
@@ -20,19 +20,51 @@ pull:
 # the deployments section allows you to provide configuration for deploying flows
 deployments:
 - name: hckr_nws
-  version: null
+  version:
   tags: []
-  description: "This is the main flow that will parse the main page and then initiate\
-    \ \nthe subflows and tasks to fetch the questions, their age, the comments and\
-    \ save \neverything in a postgresql database"
+  description: "This is the main flow that will parse the main page and then initiate
+    \nthe subflows and tasks to fetch the questions, their age, the comments and save
+    \neverything in a postgresql database"
   entrypoint: hckr_nws_flow.py:fetch_all_questions
   parameters: {}
   work_pool:
     name: hckr_nws_wrkr
-    work_queue_name: null
+    work_queue_name:
     job_variables: {}
   schedules:
   - interval: 30.0
     anchor_date: '2024-03-23T08:55:46.248695+00:00'
+    timezone: UTC
+    active: true
+- name: daily_digest
+  version:
+  tags: []
+  description: "This is the main flow that will parse the main page and then initiate
+    \nthe subflows and tasks to fetch the questions, their age, the comments and save
+    \neverything in a postgresql database"
+  entrypoint: hckr_nws_flow.py:fetch_all_HN_questions
+  parameters: {}
+  work_pool:
+    name: hckr_nws_wrkr
+    work_queue_name:
+    job_variables: {}
+  schedules:
+  - interval: 60.0
+    anchor_date: '2024-03-24T12:20:40.513808+00:00'
+    timezone: UTC
+    active: true
+- name: daily_digest_update
+  version:
+  tags: []
+  description:
+  entrypoint: hckr_nws_flow.py:daily_digest
+  parameters: {}
+  work_pool:
+    name: hckr_nws_wrkr
+    work_queue_name:
+    job_variables: {}
+  schedules:
+  - interval: 60.0
+    anchor_date: '2024-03-24T13:00:11.076663+00:00'
     timezone: UTC
     active: true

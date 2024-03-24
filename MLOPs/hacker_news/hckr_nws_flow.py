@@ -6,8 +6,21 @@ import psycopg2
 import json
 
 
-@flow(name='Fetch Today\'s HN Questions')
-def fetch_all_questions():  
+@flow(name = 'Daily digest')
+def daily_digest():
+
+    fetch_all_HN_questions()
+    google_mlops_job_search()
+
+
+
+
+@flow(flow_run_name = 'google_mlops_job_search')
+def google_mlops_job_search():
+    print('hello')
+
+@flow(flow_run_name='Fetch Today\'s HN Questions')
+def fetch_all_HN_questions():  
     '''This is the main flow that will parse the main page and then initiate 
     the subflows and tasks to fetch the questions, their age, the comments and save 
     everything in a postgresql database'''
@@ -19,7 +32,7 @@ def fetch_all_questions():
     question_tags = soup.find_all('tr', class_='athing')
     age_tags =  soup.find_all('span', class_='age')
     question_age_zip = zip(question_tags,age_tags)
-    age_pattern =re.compile(r'(\d+)\s+(day|days|hour|hours)\s+ago')
+    age_pattern =re.compile(r'(\d+)\s+(day|days|hour|hours|minute|minutes)\s+ago')
     # question_pattern = re.compile(r'<span class="titleline"><a href="item\?id=\d+">(.*?)</a></span>')
     for question, age in question_age_zip:
         age_matches = age_pattern.search(str(age))
@@ -36,7 +49,7 @@ def fetch_all_questions():
 def filter_daily_questions(question_id, question,age):
     '''takes all the questions in the scraped page and filters those that were added in the alst 24 hours'''
     comments = scrape_question_comments(question_id)
-    comments = json.dumps(comments)#serializing the list of strings into json so i can save it as TEXT in the sql table
+    # comments = json.dumps(comments)#serializing the list of strings into json so i can save it as TEXT in the sql table
     pg_con = 'postgres://postgres:mysecretpassword@localhost:5434/postgres'
     create_table(pg_con)
     insert_question(pg_con, question, age, comments)
@@ -108,4 +121,4 @@ def insert_question(conn_params, question, age, comments):
 
 
 if __name__ == "__main__":
-    fetch_all_questions()
+    daily_digest()
