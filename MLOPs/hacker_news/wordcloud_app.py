@@ -3,10 +3,11 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import psycopg2
 import pandas as pd
-from serpapi import search
-import re
-import datetime
-
+# from serpapi import search
+# import re
+# import datetime
+from bs4 import BeautifulSoup
+import requests
 
 # Function to fetch text data from PostgreSQL database
 def fetch_data_from_database():
@@ -106,9 +107,29 @@ def query_table():
 
 
 
+def the_times_headlines():
+    url = "https://www.thetimes.co.uk/business-money"
+    res = requests.get(url)
+    soup = BeautifulSoup(res.text, 'html.parser')
+    sections = soup.find_all('div', class_="css-6fg9h")
+
+    headlines = []
+
+    for section in sections:
+        span_headlines = section.find_all('span', class_="css-17x5lw")
+        for headline in span_headlines:
+            # Check if the headline is not already in the list before appending
+            if headline.text.strip() not in headlines:
+                if headline.text.strip() != 'Money':
+                    headlines.append(headline.text.strip())
+
+    df_the_times_headlines = pd.DataFrame({'https://www.thetimes.co.uk/business-money': headlines})
+    return df_the_times_headlines
+
 
 
 def main():
+    st.set_page_config(layout = "wide")
     st.title("Word Cloud from Hacker News in the past 24 hours")
     
     # Fetch data from database
@@ -125,8 +146,12 @@ def main():
         # Generate and display word cloud
         word_cloud_plot = generate_wordcloud(data)
     
+    df_the_times_headlines = the_times_headlines()
+
     st.pyplot(word_cloud_plot)
+
     st.table(top_10_google_search_results_df)
+    st.table(df_the_times_headlines)
     
 if __name__ == "__main__":
     main()

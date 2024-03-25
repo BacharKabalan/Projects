@@ -83,3 +83,18 @@ deployments:
     anchor_date: '2024-03-24T19:48:44.722109+00:00'
     timezone: UTC
     active: true
+- name: daily_digest_file_structure
+  version:
+  tags: []
+  description:
+  entrypoint: main.py:daily_digest_2
+  parameters: {}
+  work_pool:
+    name: hckr_nws_wrkr
+    work_queue_name:
+    job_variables: {}
+  schedules:
+  - interval: 120.0
+    anchor_date: '2024-03-25T08:12:04.724887+00:00'
+    timezone: UTC
+    active: true
